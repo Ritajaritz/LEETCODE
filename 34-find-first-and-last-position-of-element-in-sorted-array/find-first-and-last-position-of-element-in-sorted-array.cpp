@@ -1,29 +1,29 @@
 class Solution {
 public:
     vector<int> searchRange(vector<int>& nums, int target) {
-        vector<int> result = {-1, -1};
+        vector<int> ans = {-1, -1};
 
         if (nums.empty()) {
-            return result;
+            return ans;
         }
 
-        result[0] = findFirstPosition(nums, target);  // Find the first occurrence
-        result[1] = findLastPosition(nums, target);   // Find the last occurrence
+        ans[0] = findFirst(nums, target);  //first occurrence
+        ans[1] = findLast(nums, target);   //last occurrence
 
-        return result;
+        return ans;
     }
 
 private:
-    int findFirstPosition(const vector<int>& nums, int target) {
+    int findFirst(const vector<int>& nums, int target) {
         int s = 0, e = nums.size() - 1;
-        int result = -1;
+        int ans = -1;
 
         while (s <= e) {
             int mid = s + (e - s) / 2;
 
             if (nums[mid] == target) {
-                result = mid;
-                e = mid - 1; // Move left to find the first occurrence
+                ans = mid;
+                e = mid - 1; 
             } else if (nums[mid] < target) {
                 s = mid + 1;
             } else {
@@ -31,19 +31,19 @@ private:
             }
         }
 
-        return result;
+        return ans;
     }
 
-    int findLastPosition(const vector<int>& nums, int target) {
+    int findLast(const vector<int>& nums, int target) {
         int s = 0, e = nums.size() - 1;
-        int result = -1;
+        int ans = -1;
 
         while (s <= e) {
             int mid = s + (e - s) / 2;
 
             if (nums[mid] == target) {
-                result = mid;
-                s = mid + 1; // Move right to find the last occurrence
+                ans = mid;
+                s = mid + 1;
             } else if (nums[mid] < target) {
                 s = mid + 1;
             } else {
@@ -51,6 +51,6 @@ private:
             }
         }
 
-        return result;
+        return ans;
     }
 };
