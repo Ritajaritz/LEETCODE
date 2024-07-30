@@ -1,28 +1,13 @@
 class Solution {
 public:
-    int findDuplicate(std::vector<int>& nums) {
-        int left = 1;
-        int right = nums.size() - 1;
-
-        while (left < right) {
-            int mid = left + (right - left) / 2;
-            int count = 0;
-
-            // Count the numbers less than or equal to mid
-            for (int num : nums) {
-                if (num <= mid) {
-                    count++;
-                }
+    int findDuplicate(vector<int>& nums) {
+        for (int i = 0; i < nums.size(); i++) {
+            int ind = abs(nums[i]);
+            if (nums[ind] < 0) {
+                return ind;
             }
-
-            // If count is greater than mid, the duplicate lies in the left half
-            if (count > mid) {
-                right = mid;
-            } else { // Otherwise, it lies in the right half
-                left = mid + 1;
-            }
+            nums[ind] = -nums[ind];
         }
-
-        return left;
+        return -1;
     }
 };
